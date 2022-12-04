@@ -11,7 +11,7 @@ const infoEl = document.querySelector('.country-info');
 
 const cleanMarkup = ref => (ref.innerHTML = '');
 
-const letters = /^[A-Za-z-' ']+$/;
+const letters = /^[A-Za-z\s]*$/;
 
 const inputHandler = e => {
   const textInput = e.target.value.trim();
