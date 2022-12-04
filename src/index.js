@@ -11,7 +11,7 @@ const infoEl = document.querySelector('.country-info');
 
 const cleanMarkup = ref => (ref.innerHTML = '');
 
-const letters = /^[A-Za-z]+$/;
+const letters = /^[A-Za-z-' ']+$/;
 
 const inputHandler = e => {
   const textInput = e.target.value.trim();
@@ -60,7 +60,7 @@ const createListMarkup = data => {
   return data
     .map(
       ({ name, flags }) =>
-        `<li><img src="${flags.png}" alt="${name.common}" width="60" height="40">${name.official}</li>`
+        `<li><img src="${flags.png}" alt="${name.common}" width="60" height="40">${name.common}</li>`
     )
     .join('');
 };
