@@ -11,6 +11,8 @@ const infoEl = document.querySelector('.country-info');
 
 const cleanMarkup = ref => (ref.innerHTML = '');
 
+const letters = /^[A-Za-z]+$/;
+
 const inputHandler = e => {
   const textInput = e.target.value.trim();
 
@@ -18,6 +20,10 @@ const inputHandler = e => {
     cleanMarkup(listEl);
     cleanMarkup(infoEl);
     return;
+  }
+
+  if (!letters.test(textInput)) {
+    return Notiflix.Notify.info('Use Alphabet characters only');
   }
 
   fetchCountries(textInput)
@@ -54,7 +60,7 @@ const createListMarkup = data => {
   return data
     .map(
       ({ name, flags }) =>
-        `<li><img src="${flags.png}" alt="${name.official}" width="60" height="40">${name.official}</li>`
+        `<li><img src="${flags.png}" alt="${name.common}" width="60" height="40">${name.official}</li>`
     )
     .join('');
 };
@@ -63,11 +69,11 @@ const createInfoMarkup = data => {
   return data.map(
     ({ name, capital, population, flags, languages }) =>
       `<h1><img src="${flags.png}" alt="${
-        name.official
-      }" width="40" height="40">${name.official}</h1>
+        name.common
+      }" width="40" height="40">${name.common}</h1>
       <p>Capital: ${capital}</p>
       <p>Population: ${population}</p>
-      <p>Languages: ${Object.values(languages)}</p>`
+      <p>Languages: ${Object.values(languages).join(', ')}</p>`
   );
 };
 
